@@ -6,6 +6,9 @@
     --green: #9bb7a5;
     --white: #ffffff;
 }
+html, body {
+    overflow-x: hidden;
+}
 
 * {
     margin: 0;
@@ -31,16 +34,17 @@ body {
 .frame {
     min-height: 100vh;
     padding: 40px;
-    background:
-        /* Grade de fundo */
-        repeating-linear-gradient(0deg, transparent, transparent 98%, #f1d8df 100%),
-        repeating-linear-gradient(90deg, transparent, transparent 98%, #f1d8df 100%),
-        /* Flores nos cantos */
-        url('https://i.imgur.com/6sR0X3g.png') top left / 150px no-repeat,
-        url('https://i.imgur.com/6sR0X3g.png') top right / 150px no-repeat,
-        url('https://i.imgur.com/6sR0X3g.png') bottom left / 150px no-repeat,
-        url('https://i.imgur.com/6sR0X3g.png') bottom right / 150px no-repeat;
-    
+background:
+    repeating-linear-gradient(0deg, transparent, transparent 98%, #f1d8df 100%),
+    repeating-linear-gradient(90deg, transparent, transparent 98%, #f1d8df 100%);
+
+/* Flores nos cantos (vou reativar depois)
+    url('https://i.imgur.com/6sR0X3g.png') top left / 150px no-repeat,
+    url('https://i.imgur.com/6sR0X3g.png') top right / 150px no-repeat,
+    url('https://i.imgur.com/6sR0X3g.png') bottom left / 150px no-repeat,
+    url('https://i.imgur.com/6sR0X3g.png') bottom right / 150px no-repeat;
+*/
+
     background-size: 50px 50px, 50px 50px, 200px, 200px, 200px, 200px;
     
     /* Borda Marrom */
