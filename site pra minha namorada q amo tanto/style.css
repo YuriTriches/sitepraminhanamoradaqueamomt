@@ -1,0 +1,813 @@
+:root {
+    --bg: #fdf9f6;
+    --pink: #f2b6c6;
+    --pink-strong: #e58aa3;
+    --brown: #5a3e36;
+    --green: #9bb7a5;
+    --white: #ffffff;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: var(--bg);
+    font-family: 'Quicksand', sans-serif;
+    color: var(--brown);
+    overflow-x: hidden;
+}
+
+/* ANIMAÇÕES */
+@keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+    100% { transform: translateY(0px); }
+}
+
+/* FRAME COM FLORES NAS BORDAS */
+.frame {
+    min-height: 100vh;
+    padding: 40px;
+    background:
+        /* Grade de fundo */
+        repeating-linear-gradient(0deg, transparent, transparent 98%, #f1d8df 100%),
+        repeating-linear-gradient(90deg, transparent, transparent 98%, #f1d8df 100%),
+        /* Flores nos cantos */
+        url('https://i.imgur.com/6sR0X3g.png') top left / 150px no-repeat,
+        url('https://i.imgur.com/6sR0X3g.png') top right / 150px no-repeat,
+        url('https://i.imgur.com/6sR0X3g.png') bottom left / 150px no-repeat,
+        url('https://i.imgur.com/6sR0X3g.png') bottom right / 150px no-repeat;
+    
+    background-size: 50px 50px, 50px 50px, 200px, 200px, 200px, 200px;
+    
+    /* Borda Marrom */
+    border: 15px solid var(--brown);
+    
+    box-shadow: 
+        inset 0 0 30px 15px rgba(229, 138, 163, 0.2);
+    position: relative;
+    z-index: 1;
+}
+
+/* HEADER */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 60px;
+}
+/* Menu container */
+.socials {
+    position: absolute;
+    top: 70px;
+    left: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    
+    opacity: 0;
+    transform: translateY(-20px);
+    pointer-events: none;
+    transition: all 0.4s ease;
+}
+
+/* Quando ativo */
+.socials.ativo {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+}
+
+/* Links */
+.socials a {
+    text-decoration: none;
+    color: #FF4D6D;
+    font-weight: 600;
+    background: #FFF0F3;
+    padding: 8px 15px;
+    border-radius: 20px;
+
+    opacity: 0;
+    transform: translateX(-15px);
+    transition: all 0.4s ease;
+}
+
+/* Animação em ordem */
+.socials.ativo a:nth-child(1) {
+    opacity: 1;
+    transform: translateX(0);
+    transition-delay: 0.1s;
+}
+
+.socials.ativo a:nth-child(2) {
+    opacity: 1;
+    transform: translateX(0);
+    transition-delay: 0.2s;
+}
+
+.menu {
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.menu:hover {
+    transform: scale(1.2); /* Apenas expande */
+    color: var(--pink-strong);
+}
+/* O GRUPO DO LOGO */
+.logo-dafne {
+    position: absolute;
+    top: 30px;
+    right: 30px;
+    font-family: 'Dancing Script', cursive;
+    font-size: 2.5rem;
+    color: var(--brown);
+    display: flex;
+    gap: 4px;
+    cursor: default;
+    z-index: 10;
+    filter: drop-shadow(0 4px 10px rgba(0,0,0,0.05));
+}
+
+/* CADA LETRA COM MOVIMENTO ORGÂNICO */
+.logo-dafne span {
+    display: inline-block;
+    /* Usando cubic-bezier para o movimento ficar elegante */
+    animation: ondaLuxo 2.5s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite;
+}
+
+/* DELAYS MAIS CURTOS PARA UMA ONDA MAIS FLUIDA */
+.logo-dafne span:nth-child(1) { animation-delay: 0.1s; }
+.logo-dafne span:nth-child(2) { animation-delay: 0.2s; }
+.logo-dafne span:nth-child(3) { animation-delay: 0.3s; }
+.logo-dafne span:nth-child(4) { animation-delay: 0.4s; }
+.logo-dafne span:nth-child(5) { animation-delay: 0.5s; }
+
+/* A NOVA ANIMAÇÃO MELHORADA */
+@keyframes ondaLuxo {
+    0%, 100% {
+        transform: translateY(0) rotate(0deg) scale(1);
+        color: var(--brown);
+        filter: blur(0);
+    }
+    30% {
+        /* O pulo com uma leve inclinação e aumento */
+        transform: translateY(-12px) rotate(-5deg) scale(1.2);
+        color: var(--pink-strong);
+        filter: drop-shadow(0 0 8px rgba(229, 138, 163, 0.4));
+    }
+    50% {
+        /* Uma pequena pausa no ar */
+        transform: translateY(-10px) rotate(3deg) scale(1.15);
+    }
+}
+
+/* HOVER: Apenas uma leve expansão do conjunto */
+.logo-dafne:hover {
+    transform: scale(1.05);
+    transition: transform 0.3s ease;
+}
+
+/* HERO & FOTO */
+.hero {
+    text-align: center;
+    max-width: 900px;
+    margin: auto;
+}
+.minha princesa {
+    animation: float 5s ease-in-out infinite;
+}
+
+.hero img {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 5px solid var(--white);
+    margin-bottom: 20px;
+    filter: brightness(1.05) contrast(1.1) drop-shadow(0 5px 15px rgba(0,0,0,0.2));
+    transition: transform 0.4s ease;
+}
+
+.hero img:hover {
+    transform: scale(1.1);
+}
+
+/* DESTAQUE NO NOME */
+.hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    line-height: 1.1;
+    margin-bottom: 10px;
+    transition: transform 0.3s ease;
+}
+
+.hero h1:hover {
+    transform: scale(1.05); /* Apenas expande */
+    cursor: default;
+}
+
+.hero h1 span {
+    color: var(--pink-strong);
+    display: block;
+    font-family: 'Dancing Script', cursive; /* Fonte mais destacada para o nome */
+    font-size: 1.2em;
+    text-shadow: 2px 2px 10px rgba(229, 138, 163, 0.3);
+    margin-top: 10px;
+}
+
+.hero p {
+    font-size: 1rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    opacity: 0.7;
+    margin-top: 20px;
+}
+/* Estilo especial para o nome dela */
+.meuamor {
+    font-family: 'Dancing Script', cursive;
+    font-size: clamp(1rem, 2.5vw, 12rem) !important;
+    color: #FF2E63; /* rosa mais intenso */
+    text-align: center;
+    margin-top: 10px;
+    font-weight: 700;
+    line-height: 1;
+
+    text-shadow: 
+        3px 3px 0 #ffffff,
+        0 0 15px rgba(255, 46, 99, 0.6),
+        0 5px 15px rgba(0,0,0,0.2);
+
+    transition: transform 0.4s ease;
+    cursor: default;
+    display: block;
+}
+
+
+/* Hover: Apenas expande, como você pediu */
+.meuamor:hover {
+    transform: scale(1.2);
+}
+.divider {
+    width: 100%;
+    overflow: hidden;
+    line-height: 0;
+    background-color: #e30613; /* Fundo da aba da Pucca */
+}
+
+.wave-animation {
+    position: relative;
+    display: block;
+    /* A largura maior que 100% permite que ela se mova sem "acabar" */
+    width: calc(150% + 1.3px); 
+    height: 80px;
+    /* Aplica a animação: nome, duração, tipo de movimento e loop infinito */
+    animation: moveWave 2.5s ease-in-out infinite alternate;
+}
+
+.divider .shape-fill {
+    fill: var(--bg); /* Usa a cor bege do seu :root */
+}
+
+/* Criando o movimento de balanço */
+@keyframes moveWave {
+    from {
+        transform: translateX(0);
+    }
+    to {
+        transform: translateX(-15%);
+    }
+}
+/* ABA 2   ------------------------                     */
+.aba2 {
+    margin-top: -2px; /* Remove qualquer espacinho entre a onda e o vermelho */
+}
+.aba2 {
+            /* Cor de fundo vermelha idêntica à imagem */
+            background-color: #e30613; 
+            width: 100%;
+            min-height: 500px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 40px 20px;
+            font-family: 'Arial Rounded MT Bold', 'Helvetica Rounded', Arial, sans-serif;
+            color: white;
+        }
+
+        .texto-container h2 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            font-weight: 900;
+        }
+
+        .texto-container p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            font-weight: 400;
+        }
+
+   .puccaimg {
+    position: relative;
+    max-width: 600px; /* Ou o tamanho que você já estava usando */
+    margin: 0 auto;
+    cursor: pointer;
+}
+
+/* Configuração geral para as duas imagens ficarem uma sobre a outra */
+.puccaimg img {
+    width: 100%;
+    height: auto;
+    display: block;
+    transition: opacity 0.4s ease-in-out; /* Deixa a troca suave */
+}
+
+/* A segunda imagem (02a) fica invisível por padrão */
+.puccaimg .img-hover {
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    cursor: default;
+}
+
+/* Quando passa o mouse: esconde a primeira e mostra a segunda */
+.puccaimg:hover .img-default {
+    opacity: 0;
+}
+
+.puccaimg:hover .img-hover {
+    opacity: 1;
+}
+.secao-apresentacao {
+    padding: 80px 20px;
+    background-color: #ffffff;
+    display: flex;
+    justify-content: center;
+    font-family: 'Quicksand', sans-serif; /* Fonte fofa aplicada em tudo */
+}
+
+.container-apresentacao {
+    max-width: 1100px;
+    display: flex;
+    align-items: center;
+    gap: 60px;
+}
+
+/* Título com destaque */
+.titulo-principal {
+    font-size: 52px;
+    font-weight: 700;
+    color: #333;
+    margin-bottom: 5px;
+}
+
+.destaque-rosa {
+    color: #FF85A2; /* Rosa principal */
+    position: relative;
+}
+
+.subtitulo-oficial {
+    font-size: 14px;
+    letter-spacing: 2px;
+    color: #FFB3C6; /* Rosa mais claro para o subtítulo */
+    margin-bottom: 30px;
+    font-weight: 700;
+}
+
+/* Caixa com fundo rosinha bem claro */
+.caixa-texto-fofa {
+    background-color: #FFF0F3; /* Rosinha bem clarinho de fundo */
+    padding: 30px;
+    border-radius: 25px;
+    border-left: 5px solid #FFC2D1; /* Detalhe lateral em rosa */
+}
+
+.paragrafo-apresentacao {
+    font-size: 18px;
+    line-height: 1.8;
+    color: #555;
+    font-weight: 400;
+    margin-bottom: 15px;
+}
+
+.paragrafo-apresentacao strong {
+    color: #FF4D6D; /* Rosa mais forte para destacar o namorado */
+    font-weight: 700;
+}
+
+/* Imagem com borda fofa */
+/* Mantém seu código original para mobile primeiro */
+.imagem-apresentacao img {
+    width: 100%;
+    max-width: 500px;
+    height: auto;
+    object-fit: contain;
+    border-radius: 40px;
+    border: 8px solid #FFF0F3; 
+    box-shadow: 0 15px 30px rgba(255, 133, 162, 0.15);
+}
+
+ /* Ajuste específico para computadores */
+@media (min-width: 1024px) {
+    .container-apresentacao {
+        width: 250%; 
+        transform: translateX(0%); /* Ajustei para negativo para ir à esquerda */
+        display: flex; 
+        justify-content: flex-start; 
+    } /* <-- Faltava fechar esta chave! */
+
+ .imagem-apresentacao img {
+        width: 500px; 
+        height: 300px; 
+        object-fit: cover; 
+        /* Aumente o valor abaixo (ex: 80px, 100px) para descer ainda mais */
+        transform: translateY(40px); 
+     
+    }
+}
+/* Ajuste Celular */
+@media (max-width: 768px) {
+    .container-apresentacao {
+        flex-direction: column;
+        text-align: center;
+    }
+    .caixa-texto-fofa {
+        border-left: none;
+        border-top: 5px solid #FFC2D1;
+    }
+}
+.secao-promessa {
+    padding: 80px 20px;
+    background-color: #ffffff;
+    display: flex;
+    justify-content: center;
+    font-family: 'Quicksand', sans-serif;
+}
+
+.container-promessa {
+    max-width: 1100px;
+    display: flex;
+    align-items: center;
+    gap: 60px;
+}
+
+/* Caixa estilo igual à anterior */
+.caixa-promessa-fofa {
+    background-color: #FFF0F3;
+    padding: 30px;
+    border-radius: 25px;
+    border-right: 5px solid #FFC2D1; /* invertido (era left antes) */
+}
+
+.texto-promessa p {
+    font-size: 18px;
+    line-height: 1.8;
+    color: #555;
+    margin-bottom: 15px;
+}
+
+.texto-promessa strong {
+    color: #FF4D6D;
+    font-weight: 700;
+}
+
+/* Imagem */
+.imagem-promessa img {
+    width: 100%;
+    max-width: 500px;
+    height: auto;
+    border-radius: 40px;
+    border: 8px solid #FFF0F3;
+    box-shadow: 0 15px 30px rgba(255, 133, 162, 0.15);
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+    .container-promessa {
+        flex-direction: column-reverse; /* texto em cima, imagem embaixo */
+        text-align: center;
+    }
+
+    .imagem-promessa {
+        margin-top: 20px;
+    }
+
+    .caixa-promessa-fofa {
+        border-right: none;
+        border-top: 5px solid #FFC2D1;
+    }
+}
+/*pc */
+@media (min-width: 1024px) {
+    .imagem-promessa img {
+        width: 550px;   /* aumentou */
+        height: 350px;
+        object-fit: cover;
+    }
+}
+/* Container Pai */
+.aba3 .elementor-element-39a57fe {
+    background-color: #F187A1; /* Rosa da Pucca */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 80px 0;
+    width: 100%;
+    min-height: 450px;
+}
+
+/* Inner Container - Organiza lado a lado */
+.aba3 .e-con-inner {
+    display: flex;
+    max-width: 1200px;
+    width: 90%;
+    margin: 0 auto;
+    align-items: center;
+    gap: 40px; /* Espaço entre texto e imagem */
+}
+
+/* Coluna de Texto */
+.aba3 .elementor-element-a65ad43 {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+/* Título */
+.aba3 .elementor-heading-title {
+    color: #FFFFFF !important;
+    font-family: 'Fredoka', 'Quicksand', sans-serif;
+    font-size: 48px;
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+
+/* Parágrafo */
+.aba3 .elementor-widget-text-editor p {
+    color: #FFFFFF !important;
+    font-family: 'Quicksand', sans-serif;
+    font-size: 18px;
+    line-height: 1.5;
+    font-weight: 500;
+    margin: 0;
+}
+
+/* Coluna da Imagem */
+.aba3 .elementor-element-8f94c42 {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.aba3 .elementor-widget-image img {
+    max-width: 100%;
+    height: auto;
+    /* Adiciona um leve balanço se quiser dar vida ao personagem */
+    transition: transform 0.3s ease;
+}
+
+/* Responsividade para Tablets e Celulares */
+@media (max-width: 1024px) {
+    .aba3 .e-con-inner {
+        flex-direction: column;
+        text-align: center;
+        gap: 30px;
+    }
+    
+    .aba3 .elementor-heading-title {
+        font-size: 36px;
+    }
+}
+
+
+
+
+
+/* Container Principal */
+.secao-pucca-final {
+    position: relative;
+    background-color: #ffffff;
+    width: 100%;
+    padding: 0;
+    overflow: hidden;
+}
+
+/* 1. O efeito Amoeba (Ondas) no topo - MANTIDO */
+.wave-top {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 120px;
+    background-color: #FEEFF1;
+    background-image: radial-gradient(circle at 50% 120%, #ffffff 50%, transparent 52%);
+    background-size: 80px 100%;
+    background-repeat: repeat-x;
+}
+
+/* 2. Conteúdo e Pingente - AJUSTADO PARA CENTRALIZAR TEXTO */
+.conteudo-pingente {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    max-width: 1200px;
+    margin: 0 auto;
+    /* Aumentamos de 60px para 150px para dar o espaço que você quer */
+    padding: 160px 20px 150px 20px; 
+    min-height: 250px;
+}
+
+/* Estilo do Texto - AJUSTADO (MAIOR) */
+.texto-abafim {
+    font-family: 'Comic Sans MS', 'Chalkboard SE', 'cursive';
+    color: #D12F2F;
+    font-size: 2.5rem; /* Grandinho como você pediu */
+    font-weight: bold;
+    text-align: center;
+    line-height: 1.2;
+    text-shadow: 2px 2px 0px #ffffff, 4px 4px 0px rgba(249, 191, 203, 0.3);
+    letter-spacing: 1px;
+    animation: flutuar 3s ease-in-out infinite;
+    z-index: 2;
+}
+
+/* Pingente - AJUSTADO PARA FICAR NA DIREITA */
+.pingente-wrapper {
+    position: absolute;
+    right: 30px; /* Colado na direita */
+    top: 60px;   /* Altura original */
+    width: 100px;
+    z-index: 5;
+}
+
+.pingente-wrapper img {
+    width: 100%;
+    height: auto;
+    transform-origin: top center;
+    animation: swing 3.5s ease-in-out infinite;
+}
+
+/* 3. Divisor Pontilhado com Coração - MANTIDO */
+.divisor-coracao {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 20px 0;
+}
+
+.linha-pontilhada {
+    flex: 1;
+    border-bottom: 3px dotted #F9BFCB;
+    height: 1px;
+    margin: 0 15px;
+}
+
+.icone-coracao {
+    width: 25px;
+    height: 25px;
+    fill: #D12F2F;
+}
+
+/* Animações - MANTIDAS */
+@keyframes flutuar {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-15px); }
+}
+
+@keyframes swing {
+    0% { transform: rotate(0deg); }
+    30% { transform: rotate(5deg); }
+    70% { transform: rotate(-5deg); }
+    100% { transform: rotate(0deg); }
+}
+
+/* Responsividade - AJUSTADO PARA O PINGENTE FICAR EMBAIXO */
+@media (max-width: 768px) {
+    .conteudo-pingente {
+        flex-direction: column;
+        padding-top: 120px;
+    }
+
+    .pingente-wrapper {
+        position: relative; /* No celular, ele sai do canto e vai pra baixo */
+        right: auto;
+        top: 20px;
+        margin: 0 auto;
+    }
+
+    .texto-abafim {
+        font-size: 1.8rem; /* Um pouco menor no celular para não quebrar */
+    }
+}
+.custom-footer {
+    background-color: #fffafa; 
+    padding: 50px 20px 30px 20px;
+    font-family: 'Quicksand', sans-serif;
+    border-top: 1px solid #ffe0e5;
+}
+
+.footer-container {
+    max-width: 1000px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.footer-main {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 40px;
+    margin-bottom: 25px;
+}
+
+.footer-logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.footer-logo img {
+    height: 45px;
+}
+
+.logo-text {
+    font-weight: 700;
+    font-size: 1.4rem;
+    color: #ff6b81;
+    letter-spacing: -0.5px;
+}
+
+/* Menu com as barrinhas verticais da imagem */
+.footer-nav {
+    display: flex;
+    align-items: center;
+}
+
+.footer-nav a {
+    text-decoration: none;
+    color: #4a4a4a;
+    font-weight: 600;
+    font-size: 0.95rem;
+    padding: 0 18px;
+    border-left: 1px solid #d1d1d1; /* A linha vertical */
+    transition: color 0.3s;
+}
+
+.footer-nav a:first-child {
+    border-left: none; /* Remove a linha do primeiro item */
+}
+
+.footer-nav a:hover {
+    color: #ff6b81;
+}
+
+.footer-divider {
+    border: 0;
+    border-top: 1px solid #eee;
+    margin: 25px auto;
+    width: 80%;
+}
+
+.footer-dedicatoria p {
+    font-style: italic;
+    font-weight: 700;
+    color: #666;
+    font-size: 1.1rem;
+    margin-bottom: 20px;
+}
+
+.footer-bottom {
+    font-size: 0.8rem;
+    color: #999;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Ajuste para celulares */
+@media (max-width: 768px) {
+    .footer-main {
+        flex-direction: column;
+        gap: 20px;
+    }
+    .footer-nav {
+        flex-direction: column;
+    }
+    .footer-nav a {
+        border-left: none;
+        border-bottom: 1px solid #f0f0f0;
+        padding: 8px 0;
+        width: 100%;
+    }
+}
